@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Laugh.wav-4d5d45ed194d5dc8149af5395aaa482f.sample"
+
+[deps]
+
+source_file="res://sound/satan/Laugh.wav"
+dest_files=[ "res://.import/Laugh.wav-4d5d45ed194d5dc8149af5395aaa482f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

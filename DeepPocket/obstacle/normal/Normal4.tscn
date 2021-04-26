@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://obstacle/Obstacle.gd" type="Script" id=1]
+[ext_resource path="res://obstacle/Rotation.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obstacle/normal/Untitled_Artwork-4.png" type="Texture" id=3]
+
+[node name="Normal1" type="Area2D" groups=[
+"obstacle",
+]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Rotation" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 34, -62.8, 34, -61.2, 44, -56.2, 44, -54.7, 51, -46.8, 51, -28.5, 32.2, 7, 30.9, 7, -0.100006, 40, -2.5, 40, -14.5, 47, -28, 47, -28, 45.4, -40, 41.4, -40, 39.9, -47, 33.9, -47, 31.5, -50, 25.5, -50, 1, -48.8, 1, -47.8, -10, -46.3, -10, -42, -19.4, -42, -21, -43.2, -33, -41.4, -33, -38.4, -41, -36.9, -41, -27.9, -51, -24.4, -51, -18, -53.4, -8.8, -62, -5.3, -62, 2, -64.4, 2, -66.2 )

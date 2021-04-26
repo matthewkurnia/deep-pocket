@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://obstacle/Obstacle.gd" type="Script" id=1]
+[ext_resource path="res://obstacle/ZigZag.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obstacle/Rotation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obstacle/hell/Untitled_Artwork-6.png" type="Texture" id=4]
+
+[node name="Hell1" type="Area2D" groups=[
+"obstacle",
+]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="Rotation" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 52, -146.9, 52, -145.4, 62, -141.4, 62, -134.6, 44.3, -92, 43.1, -92, 25.4, -65.4, 52, -57.5, 52, -56, 70, -42, 70, -38.6, 90, -6.60001, 90, -3.3, 95.9, 17.1, 105.8, 0, 107.3, 0, 121.3, -11, 125.1, -11, 141, -8.7, 141, -6.8, 150, 2.2, 150, 6, 151, 41, 149.5, 41, 136.5, 90, 135.3, 90, 130.3, 102, 128.5, 102, 118.6, 108, 104, 108, 104, 106.4, 94, 102.4, 94, 100.8, 90.5, 97.3, 73.1, 126, 70.7, 126, 55.7, 137, 53.5, 137, 37.5, 145, 28.1, 145, 9.29999, 150, 3.89999, 150, -34, 145.8, -34, 144.4, -59, 134.4, -59, 133.1, -69, 127.1, -69, 125.7, -74.9, 119, -81.2, 125, -84.7, 125, -99, 127.4, -99, 125.2, -113, 118.2, -113, 116.7, -125, 100.7, -125, 92.5, -135, 75.5, -135, 72.4, -150, 39.4, -150, 36, -152.6, 26, -150.2, 26, -148, 21.5, -148, 20.6, -150.3, 17.1, -149.2, 15, -148.1, 15, -146.1, 12, -143.3, 12, -126, 9.70001, -126, 11.8, -111, 18.7, -111, 20.2, -94.7, 36.5, -89.7, 2, -88.4, 2, -80.4, -21, -79, -21, -60, -46, -57.8, -46, -50.8, -53, -48.4, -53, -33, -59, -74, -95.1, -74, -96.2, -93.4, -116.6, -92.3, -119, -90.7, -119, -77.7, -130, -73.4, -130, -50.4, -139, -46, -139, -20.2, -145, -12.1, -145, 13, -146.9, 13, -148.1 )
+
+[node name="ZigZag" parent="." instance=ExtResource( 2 )]

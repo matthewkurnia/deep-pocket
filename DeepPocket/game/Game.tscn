@@ -1,0 +1,909 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://RubikMonoOne-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://game/ScoreLabel.gd" type="Script" id=2]
+[ext_resource path="res://game/HealthLabel.gd" type="Script" id=3]
+[ext_resource path="res://obstacle/ObstacleSpawner.gd" type="Script" id=4]
+[ext_resource path="res://player/Player.gd" type="Script" id=5]
+[ext_resource path="res://game/Parallax.gd" type="Script" id=6]
+[ext_resource path="res://player/hand/Untitled_Artwork-2.png" type="Texture" id=7]
+[ext_resource path="res://player/hand/Untitled_Artwork-3.png" type="Texture" id=8]
+[ext_resource path="res://player/hand/Arm.png" type="Texture" id=9]
+[ext_resource path="res://game/Heart.png" type="Texture" id=10]
+[ext_resource path="res://player/hand/Forearm.png" type="Texture" id=11]
+[ext_resource path="res://player/hand/Untitled_Artwork-5.png" type="Texture" id=12]
+[ext_resource path="res://player/hand/Untitled_Artwork-1.png" type="Texture" id=13]
+[ext_resource path="res://player/hand/Untitled_Artwork-6.png" type="Texture" id=14]
+[ext_resource path="res://player/hand/Untitled_Artwork-4.png" type="Texture" id=15]
+[ext_resource path="res://game/Game.gd" type="Script" id=16]
+[ext_resource path="res://bgr/BackgroundWall.png" type="Texture" id=17]
+[ext_resource path="res://game/Satan.gd" type="Script" id=18]
+[ext_resource path="res://game/Satan.png" type="Texture" id=19]
+[ext_resource path="res://gradient_map/GradientMap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://gradient_map/GradientMap.gd" type="Script" id=21]
+[ext_resource path="res://intro/Cutscene-3.png" type="Texture" id=22]
+[ext_resource path="res://game/HurtSound.gd" type="Script" id=23]
+[ext_resource path="res://sound/Hurt3.wav" type="AudioStream" id=24]
+[ext_resource path="res://sound/Hurt2.wav" type="AudioStream" id=25]
+[ext_resource path="res://sound/Hurt1.wav" type="AudioStream" id=26]
+[ext_resource path="res://sound/Hurt.wav" type="AudioStream" id=27]
+[ext_resource path="res://game/SpeechBubble.png" type="Texture" id=28]
+[ext_resource path="res://sound/satan/LookingForKeys.wav" type="AudioStream" id=29]
+[ext_resource path="res://sound/satan/RightThisWay.wav" type="AudioStream" id=30]
+[ext_resource path="res://sound/satan/Laugh.wav" type="AudioStream" id=31]
+[ext_resource path="res://Key.png" type="Texture" id=32]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 12.0
+height = 80.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 12.0
+height = 90.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 12.0
+height = 80.0
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 14.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 40.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 50.0
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 25.0
+height = 60.0
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 30.0
+
+[sub_resource type="Animation" id=10]
+resource_name = "hurt"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.317647, 0.317647, 0.317647, 1 ), Color( 1, 1, 1, 1 ), Color( 0.317647, 0.317647, 0.317647, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=11]
+size = 50
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=12]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( -2, -2, -2, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, -30.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.7, 0.7 ), Vector2( 0.4, 0.4 ), Vector2( 0.7, 0.7 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "fade_out"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "satan"
+length = 14.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpeachBubble:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.1, 2.6, 9.4, 9.8 ),
+"transitions": PoolRealArray( 1, 0.5, 1, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 170.597, -450 ), Vector2( 170.597, -450 ), Vector2( 170.597, -521.713 ), Vector2( 170.597, -521.713 ), Vector2( 170.597, -450 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpeachBubble:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.1, 2.6, 9.4, 9.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.541176, 0.541176, 0.541176, 0 ), Color( 0.541176, 0.541176, 0.541176, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.541176, 0.541176, 0.541176, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8 ),
+"transitions": PoolRealArray( 1, 1, -2, -2, -2, -2, -2, -2, 1, 1, -2, -2, -2, -2, -2, -2, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -4.0, 4.0, -4.0, 4.0, -4.0, 4.0, 0.0, 0.0, -4.0, 4.0, -4.0, 4.0, -4.0, 4.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpeachBubble/Dialog1:percent_visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3.1, 4.3, 6.1 ),
+"transitions": PoolRealArray( 1, 1, 0, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpeachBubble/Dialog2:percent_visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 6.1, 7.3, 9.1 ),
+"transitions": PoolRealArray( 1, 1, 0, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.7, 2.7, 3.7, 4.7, 5.7, 6.7, 7.7, 8.7, 9.7, 12.8 ),
+"transitions": PoolRealArray( -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( -700, -20 ) ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("Audio1")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 29 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 31 )
+} ],
+"times": PoolRealArray( 2, 8.8 )
+}
+tracks/8/type = "audio"
+tracks/8/path = NodePath("Audio2")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 30 )
+} ],
+"times": PoolRealArray( 5.5 )
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.6
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("UserInterface/Control/Hurt:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06, 0.14, 0.24, 0.38, 0.48, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 20, 20 ), Vector2( 12, -12 ), Vector2( 0, 10 ), Vector2( -4, -3 ), Vector2( -4.583, 15 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "key"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 20 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 511.265, 2307.42 ), Vector2( 511.265, 575.377 ) ]
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 16 )
+player = NodePath("PlayerController/Player")
+depth_label = NodePath("UserInterface/Control/DepthLabel")
+health_label = NodePath("UserInterface/Control/HealthLabel")
+parallax = NodePath("Parallax")
+obstacle_spawner = NodePath("ObstacleSpawner")
+satan = NodePath("Satan")
+hurt_anim = NodePath("HurtAnim")
+player_hurt = NodePath("PlayerController/PlayerHurt")
+flash_anim = NodePath("UserInterface/Control/Flash/AnimationPlayer")
+tutorial_anim = NodePath("UserInterface/Control/Tutorial/AnimationPlayer")
+gradient = NodePath("UserInterface/Control/GradientMap")
+endgame = NodePath("UserInterface/Control/EndGame")
+hurt_sound = NodePath("HurtSound")
+key_anim = NodePath("Key/AnimationPlayer")
+
+[node name="DepthTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="PlayerController" type="Node2D" parent="."]
+
+[node name="Player" type="Node2D" parent="PlayerController"]
+position = Vector2( 526, 0 )
+script = ExtResource( 5 )
+
+[node name="Hand" type="Node2D" parent="PlayerController/Player"]
+position = Vector2( 0, 193.341 )
+z_index = 1
+
+[node name="Finger4" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 58.8859, 309.784 )
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Finger4"]
+position = Vector2( -2.37842, 2.97302 )
+rotation = -0.328632
+shape = SubResource( 1 )
+
+[node name="Finger4" type="Sprite" parent="PlayerController/Player/Hand/Finger4"]
+position = Vector2( -66.7418, -139.275 )
+texture = ExtResource( 15 )
+
+[node name="Finger3" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 18.4316, 333.757 )
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Finger3"]
+position = Vector2( 0.594604, 4.16223 )
+rotation = -0.164294
+shape = SubResource( 2 )
+
+[node name="Finger3" type="Sprite" parent="PlayerController/Player/Hand/Finger3"]
+position = Vector2( -26.2875, -163.248 )
+texture = ExtResource( 8 )
+
+[node name="Finger2" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -31.7617, 341.998 )
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Finger2"]
+position = Vector2( 1.18915, 1.78381 )
+rotation = 0.0990423
+shape = SubResource( 3 )
+
+[node name="Finger2" type="Sprite" parent="PlayerController/Player/Hand/Finger2"]
+position = Vector2( 23.9058, -171.489 )
+texture = ExtResource( 7 )
+
+[node name="Finger1" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -69.9685, 326.266 )
+rotation = 0.296812
+collision_layer = 524288
+collision_mask = 2148007936
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Finger1"]
+shape = SubResource( 4 )
+
+[node name="Finger1" type="Sprite" parent="PlayerController/Player/Hand/Finger1"]
+position = Vector2( 13.8422, -167.112 )
+rotation = -0.296812
+texture = ExtResource( 13 )
+
+[node name="Thumb" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -104.061, 263.851 )
+rotation = 0.284963
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Thumb"]
+shape = SubResource( 5 )
+
+[node name="Thumb" type="Sprite" parent="PlayerController/Player/Hand/Thumb"]
+position = Vector2( 66.0851, -116.624 )
+rotation = -0.284963
+texture = ExtResource( 12 )
+
+[node name="Palm" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -8.97974, 211.023 )
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Palm"]
+position = Vector2( -1.1225, 23.5717 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="Palm" type="Sprite" parent="PlayerController/Player/Hand/Palm"]
+position = Vector2( 1.1239, -40.5138 )
+texture = ExtResource( 14 )
+
+[node name="HurtBox" type="Area2D" parent="PlayerController/Player/Hand/Palm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Palm/HurtBox"]
+shape = SubResource( 7 )
+
+[node name="Arm" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 27.6883, -311.351 )
+rotation = 0.0253884
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = -100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Arm"]
+position = Vector2( -0.90448, -9.32393 )
+shape = SubResource( 8 )
+
+[node name="Arm" type="Sprite" parent="PlayerController/Player/Hand/Arm"]
+position = Vector2( -25.0461, 238.684 )
+rotation = -0.0253884
+texture = ExtResource( 9 )
+
+[node name="Forearm" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -2.31171, 76.6489 )
+rotation = 0.0253884
+collision_layer = 524288
+collision_mask = 524288
+gravity_scale = -100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Forearm"]
+position = Vector2( -0.90448, -9.32393 )
+shape = SubResource( 8 )
+
+[node name="Arm" type="Sprite" parent="PlayerController/Player/Hand/Forearm"]
+position = Vector2( -3.16, -160 )
+rotation = -0.0253884
+texture = ExtResource( 11 )
+
+[node name="Root" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 14.9832, -732.615 )
+collision_layer = 524288
+collision_mask = 524288
+mode = 1
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Root"]
+position = Vector2( 0, -30 )
+shape = SubResource( 9 )
+
+[node name="Wrist" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 0, 187.451 )
+collision_layer = 524288
+collision_mask = 524288
+mode = 1
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/Wrist"]
+position = Vector2( 0, -30 )
+shape = SubResource( 9 )
+
+[node name="BottomAnchor" type="RigidBody2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 0, 800 )
+collision_layer = 524288
+collision_mask = 524288
+mode = 1
+mass = 30.0
+gravity_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/Player/Hand/BottomAnchor"]
+shape = SubResource( 9 )
+
+[node name="PinJoint1" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 0.445496, 158.58 )
+node_a = NodePath("../Wrist")
+node_b = NodePath("../Forearm")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint2" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 0.859375, 158.376 )
+node_a = NodePath("../Wrist")
+node_b = NodePath("../Palm")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint3" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -88.8244, 223.636 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../Thumb")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint4" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -57.9564, 279.702 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../Finger1")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint5" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -23.3085, 284.742 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../Finger2")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint6" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 12.5992, 284.742 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../Finger3")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint7" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 49.137, 274.033 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../Finger4")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="PinJoint8" type="PinJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 37.137, -267.967 )
+node_a = NodePath("../Forearm")
+node_b = NodePath("../Arm")
+bias = 0.9
+disable_collision = false
+softness = 0.1
+
+[node name="Spring1" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -84.6353, 364.378 )
+node_a = NodePath("../Finger1")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 64.0
+damping = 3.0
+
+[node name="Spring2" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -32.0723, 395.559 )
+node_a = NodePath("../Finger2")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 64.0
+damping = 3.0
+
+[node name="Spring3" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 24.9452, 376.85 )
+node_a = NodePath("../Finger3")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 64.0
+damping = 3.0
+
+[node name="Spring4" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 70.381, 334.087 )
+node_a = NodePath("../Finger4")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 64.0
+damping = 3.0
+
+[node name="Spring5" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -107.684, 290.597 )
+node_a = NodePath("../Thumb")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 64.0
+damping = 3.0
+
+[node name="Spring6" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( -7.6781, 215.989 )
+node_a = NodePath("../Palm")
+node_b = NodePath("../BottomAnchor")
+disable_collision = false
+stiffness = 60.0
+damping = 3.0
+
+[node name="Spring7" type="DampedSpringJoint2D" parent="PlayerController/Player/Hand"]
+position = Vector2( 16.9077, -406.482 )
+node_a = NodePath("../Arm")
+node_b = NodePath("../Root")
+disable_collision = false
+length = 1.0
+stiffness = 60.0
+
+[node name="PlayerHurt" type="AnimationPlayer" parent="PlayerController"]
+anims/hurt = SubResource( 10 )
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="ObstacleSpawner"]
+one_shot = true
+autostart = true
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UserInterface"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GradientMap" parent="UserInterface/Control" instance=ExtResource( 20 )]
+script = ExtResource( 21 )
+
+[node name="Hurt" type="ColorRect" parent="UserInterface/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndGame" type="Control" parent="UserInterface/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UserInterface/Control/EndGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.678431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Label" parent="UserInterface/Control/EndGame"]
+margin_left = 260.0
+margin_top = 810.0
+margin_right = 819.0
+margin_bottom = 939.0
+custom_fonts/font = SubResource( 11 )
+text = "GAME OVER"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flash" type="ColorRect" parent="UserInterface/Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UserInterface/Control/Flash"]
+anims/change_stage = SubResource( 12 )
+
+[node name="DepthLabel" type="Label" parent="UserInterface/Control"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 521.0
+margin_bottom = 93.0
+custom_fonts/font = SubResource( 11 )
+text = "00100"
+valign = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="UserInterface/Control"]
+margin_left = 1000.0
+margin_top = 30.0
+margin_right = 1491.0
+margin_bottom = 93.0
+custom_fonts/font = SubResource( 11 )
+text = "4"
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UserInterface/Control/HealthLabel"]
+position = Vector2( -37, 29 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UserInterface/Control/HealthLabel"]
+anims/hurt = SubResource( 13 )
+
+[node name="Tutorial" type="CenterContainer" parent="UserInterface/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/Control/Tutorial"]
+margin_left = 260.0
+margin_top = 743.0
+margin_right = 819.0
+margin_bottom = 1176.0
+
+[node name="Tutorial" type="Label" parent="UserInterface/Control/Tutorial/VBoxContainer"]
+margin_right = 559.0
+margin_bottom = 129.0
+custom_fonts/font = SubResource( 11 )
+text = "Press left or
+right to move"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UserInterface/Control/Tutorial/VBoxContainer"]
+margin_top = 133.0
+margin_right = 559.0
+margin_bottom = 433.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="Sprite" type="Sprite" parent="UserInterface/Control/Tutorial/VBoxContainer/Control"]
+position = Vector2( 268, 380 )
+texture = ExtResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UserInterface/Control/Tutorial"]
+anims/fade_out = SubResource( 14 )
+
+[node name="Timer" type="Timer" parent="UserInterface/Control/Tutorial"]
+one_shot = true
+autostart = true
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+layer = -10
+script = ExtResource( 6 )
+
+[node name="Parallax3" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.203922, 0.203922, 0.203922, 1 )
+motion_scale = Vector2( 1, 0.5 )
+motion_mirroring = Vector2( 0, 1920 )
+
+[node name="Sprite1" type="Sprite" parent="Parallax/Parallax3"]
+position = Vector2( 621.273, 960 )
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Sprite2" type="Sprite" parent="Parallax/Parallax3"]
+position = Vector2( 473.54, 960 )
+rotation = 3.14159
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Parallax2" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
+motion_mirroring = Vector2( 0, 1920 )
+
+[node name="Sprite1" type="Sprite" parent="Parallax/Parallax2"]
+position = Vector2( 787.273, 960 )
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Sprite2" type="Sprite" parent="Parallax/Parallax2"]
+position = Vector2( 293.54, 960 )
+rotation = 3.14159
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Parallax1" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.329412, 0.329412, 0.329412, 1 )
+motion_mirroring = Vector2( 0, 1920 )
+
+[node name="Sprite1" type="Sprite" parent="Parallax/Parallax1"]
+position = Vector2( 902.906, 960 )
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Sprite2" type="Sprite" parent="Parallax/Parallax1"]
+position = Vector2( 175.09, 960 )
+rotation = 3.14159
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Satan" type="Area2D" parent="."]
+position = Vector2( 333.658, 4208.97 )
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="Satan"]
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 19 )
+
+[node name="SpeachBubble" type="Sprite" parent="Satan"]
+modulate = Color( 0.541176, 0.541176, 0.541176, 0 )
+position = Vector2( 170.597, -450 )
+texture = ExtResource( 28 )
+
+[node name="Dialog1" type="Label" parent="Satan/SpeachBubble"]
+margin_left = -254.945
+margin_top = -152.219
+margin_right = 304.055
+margin_bottom = -23.2192
+custom_fonts/font = SubResource( 11 )
+text = "LOOKING FOR
+KEYS ARE WE?"
+valign = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialog2" type="Label" parent="Satan/SpeachBubble"]
+margin_left = -316.376
+margin_top = -150.721
+margin_right = 328.624
+margin_bottom = -21.7209
+custom_fonts/font = SubResource( 11 )
+text = "RIGHT THIS WAY."
+valign = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Satan"]
+anims/satan = SubResource( 15 )
+
+[node name="Audio1" type="AudioStreamPlayer" parent="Satan"]
+stream = ExtResource( 29 )
+
+[node name="Audio2" type="AudioStreamPlayer" parent="Satan"]
+stream = ExtResource( 30 )
+
+[node name="HurtAnim" type="AnimationPlayer" parent="."]
+anims/hurt = SubResource( 16 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="HurtSound" type="Node" parent="."]
+script = ExtResource( 23 )
+
+[node name="Hurt" type="AudioStreamPlayer" parent="HurtSound"]
+stream = ExtResource( 27 )
+volume_db = -7.051
+bus = "Intro"
+
+[node name="Sound1" type="AudioStreamPlayer" parent="HurtSound"]
+stream = ExtResource( 26 )
+
+[node name="Sound2" type="AudioStreamPlayer" parent="HurtSound"]
+stream = ExtResource( 25 )
+
+[node name="Sound3" type="AudioStreamPlayer" parent="HurtSound"]
+stream = ExtResource( 24 )
+
+[node name="Key" type="Sprite" parent="."]
+position = Vector2( 511.265, 2307.42 )
+texture = ExtResource( 32 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Key"]
+anims/key = SubResource( 17 )
+[connection signal="timeout" from="DepthTimer" to="." method="_on_DepthTimer_timeout"]
+[connection signal="area_entered" from="PlayerController/Player/Hand/Palm/HurtBox" to="PlayerController/Player" method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_Timer_timeout"]
+[connection signal="timeout" from="UserInterface/Control/Tutorial/Timer" to="ObstacleSpawner" method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="Satan/AnimationPlayer" to="." method="_on_Satan_animation_finished"]
