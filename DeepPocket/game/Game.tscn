@@ -824,7 +824,7 @@ texture = ExtResource( 17 )
 region_rect = Rect2( 0, 0, 1080, 2000 )
 
 [node name="Satan" type="Area2D" parent="."]
-position = Vector2( 333.658, 4208.97 )
+position = Vector2( 333.658, 14591.5 )
 script = ExtResource( 18 )
 
 [node name="Sprite" type="Sprite" parent="Satan"]

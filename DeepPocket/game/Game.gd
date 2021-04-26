@@ -24,7 +24,7 @@ export var key_anim = NodePath()
 var outro = "res://intro/Outro.tscn"
 
 var health := 5
-var depth := 0
+var depth := 590
 var speed := 10.0
 var game_started = false
 var bottom_reached := false
