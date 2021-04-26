@@ -90,7 +90,7 @@ func set_spawn(value):
 
 
 func _on_Timer_timeout():
-	$Timer.wait_time = 1.0 - 0.5 * (speed/40) + 0.5 * randf()
+	$Timer.wait_time = 0.7 + 0.5 * randf()
 	$Timer.start()
 	if not spawning:
 		return

@@ -6,7 +6,7 @@ signal health_updated(new_health)
 signal speed_updated(new_speed)
 signal stage_updated(new_stage)
 
-export var initial_speed = 10.0
+export var initial_speed = 15.0
 export var player = NodePath()
 export var depth_label = NodePath()
 export var health_label = NodePath()
@@ -23,9 +23,9 @@ export var hurt_sound = NodePath()
 export var key_anim = NodePath()
 var outro = "res://intro/Outro.tscn"
 
-var health := 5
-var depth := 590
-var speed := 10.0
+var health := 9
+var depth := 0
+var speed := 15.0
 var game_started = false
 var bottom_reached := false
 
@@ -99,7 +99,7 @@ func update_speed(value = -1) -> void:
 	if value >= 0:
 		speed = value
 	else:
-		speed = initial_speed + depth/50 * initial_speed * 0.25
+		speed = initial_speed + depth/50 * initial_speed * 0.12
 	for obstacle in get_tree().get_nodes_in_group("obstacle"):
 		obstacle.update_speed(speed)
 	emit_signal("speed_updated", speed)
